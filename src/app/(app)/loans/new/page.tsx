@@ -146,7 +146,6 @@ function NewLoanForm() {
       setErrors({
         form: translateSupabaseError(err, "Gagal menyimpan catatan pinjaman."),
       });
-    } finally {
       setSubmitting(false);
     }
   };

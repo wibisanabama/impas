@@ -253,28 +253,28 @@ export default function LoanDetailPage() {
 
         {/* Owner Quick Actions */}
         {isOwner && (
-          <div className="flex flex-wrap items-center gap-2.5">
+          <div className="flex flex-wrap lg:flex-nowrap items-center gap-2 shrink-0">
             <button
               type="button"
               onClick={handleCopyLink}
-              className="min-h-[44px] px-4 rounded-xl border border-[#DDE4E2] bg-white hover:bg-[#F6F8F7] text-[13px] font-semibold text-[#0B1312] inline-flex items-center gap-1.5 transition-[background-color] duration-150"
+              className="min-h-[44px] px-3.5 rounded-xl border border-[#DDE4E2] bg-white hover:bg-[#F6F8F7] text-[13px] font-semibold text-[#0B1312] inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-[background-color] duration-150"
             >
               {copiedLink ? (
                 <Check className="w-4 h-4 text-[#15803D]" aria-hidden="true" />
               ) : (
                 <Copy className="w-4 h-4 text-[#475569]" aria-hidden="true" />
               )}
-              {copiedLink ? "Link tersalin" : "Salin link konfirmasi"}
+              {copiedLink ? "Tersalin" : "Salin link"}
             </button>
 
             {!isSettled && loan.contact?.whatsapp_number && (
               <button
                 type="button"
                 onClick={() => setWaModalOpen(true)}
-                className="min-h-[44px] px-4 rounded-xl border border-[#DDE4E2] bg-white hover:bg-[#E6F4F1] text-[13px] font-semibold text-[#0F766E] inline-flex items-center gap-1.5 transition-[background-color] duration-150"
+                className="min-h-[44px] px-3.5 rounded-xl border border-[#DDE4E2] bg-white hover:bg-[#E6F4F1] text-[13px] font-semibold text-[#0F766E] inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-[background-color] duration-150"
               >
                 <WhatsAppIcon className="w-4 h-4" />
-                Ingatkan via WhatsApp
+                WhatsApp
               </button>
             )}
 
@@ -282,7 +282,7 @@ export default function LoanDetailPage() {
               <button
                 type="button"
                 onClick={() => setPaymentModalOpen(true)}
-                className="min-h-[44px] px-4 rounded-xl bg-[#0F766E] hover:bg-[#0D655E] text-white text-[13px] font-semibold inline-flex items-center gap-1.5 transition-[background-color] duration-150"
+                className="min-h-[44px] px-4 rounded-xl bg-[#0F766E] hover:bg-[#0D655E] text-white text-[13px] font-semibold inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-[background-color] duration-150"
               >
                 <Plus className="w-4 h-4" aria-hidden="true" />
                 Catat cicilan
@@ -293,10 +293,10 @@ export default function LoanDetailPage() {
               <button
                 type="button"
                 onClick={() => setReturnModalOpen(true)}
-                className="min-h-[44px] px-4 rounded-xl bg-[#0F766E] hover:bg-[#0D655E] text-white text-[13px] font-semibold inline-flex items-center gap-1.5 transition-[background-color] duration-150"
+                className="min-h-[44px] px-4 rounded-xl bg-[#0F766E] hover:bg-[#0D655E] text-white text-[13px] font-semibold inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-[background-color] duration-150"
               >
                 <CheckCircle2 className="w-4 h-4" aria-hidden="true" />
-                Tandai sudah kembali
+                Tandai kembali
               </button>
             )}
           </div>
