@@ -1,0 +1,317 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-plus-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --color-canvas: #F6F8F7;
+  --color-surface: #FFFFFF;
+  --color-ink: #0B1312;
+  --color-muted: #475569;
+  --color-hairline: #DDE4E2;
+  --color-accent: #0F766E;
+  --color-accent-hover: #0D655E;
+  --color-accent-tint: #E6F4F1;
+}
+
+:root {
+  --bg-canvas: #F6F8F7;
+  --bg-surface: #FFFFFF;
+  --text-ink: #0B1312;
+  --text-muted: #475569;
+  --border-hairline: #DDE4E2;
+  --accent: #0F766E;
+  --accent-hover: #0D655E;
+  --accent-tint: #E6F4F1;
+
+  --text-heading: 1.25rem;
+  --text-body: 0.9375rem;
+  --text-sm: 0.8125rem;
+}
+
+@layer base {
+  html {
+    background-color: var(--bg-canvas);
+    color: var(--text-ink);
+    font-family: var(--font-plus-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    color: var(--text-ink);
+    font-size: var(--text-body);
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  button,
+  [role="button"],
+  a,
+  select,
+  input,
+  textarea {
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+label:has(> input.visually-hidden:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Form Controls: iOS zoom prevention (>=1rem), 48px tap target, :user-invalid
+   ========================================================================== */
+.impas-input {
+  font: inherit;
+  font-size: max(1rem, 1em);
+  min-height: 48px;
+  background-color: #FFFFFF;
+  color: var(--text-ink);
+  border: 1px solid var(--border-hairline);
+  border-radius: 0.75rem;
+  transition-property: border-color, background-color, box-shadow;
+  transition-duration: 160ms;
+}
+
+.impas-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgb(15 118 110 / 0.14);
+}
+
+.impas-input:is(:user-invalid, [aria-invalid="true"]) {
+  border-color: #BE123C;
+  background-color: #FFF1F2;
+}
+
+.impas-textarea {
+  font: inherit;
+  font-size: max(1rem, 1em);
+  background-color: #FFFFFF;
+  color: var(--text-ink);
+  border: 1px solid var(--border-hairline);
+  border-radius: 0.75rem;
+  transition-property: border-color, background-color, box-shadow;
+  transition-duration: 160ms;
+}
+
+.impas-textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgb(15 118 110 / 0.14);
+}
+
+.impas-textarea:is(:user-invalid, [aria-invalid="true"]) {
+  border-color: #BE123C;
+  background-color: #FFF1F2;
+}
+
+/* ==========================================================================
+   Native <dialog> Top-Layer Animations & Scroll Containment
+   ========================================================================== */
+dialog.impas-dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog.impas-dialog {
+  opacity: 0;
+  transition-property: opacity, transform, display, overlay;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transition-behavior: allow-discrete;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  dialog.impas-dialog {
+    transform: translateY(12px) scale(0.98);
+  }
+}
+
+dialog.impas-dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background-color: rgb(11 19 18 / 0);
+  transition-property: background-color, display, overlay;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transition-behavior: allow-discrete;
+}
+
+dialog.impas-dialog[open]:where(:not([data-closing])) {
+  opacity: 1;
+}
+
+@starting-style {
+  dialog.impas-dialog[open]:where(:not([data-closing])) {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  dialog.impas-dialog[open]:where(:not([data-closing])) {
+    transform: translateY(0) scale(1);
+  }
+
+  @starting-style {
+    dialog.impas-dialog[open]:where(:not([data-closing])) {
+      transform: translateY(12px) scale(0.98);
+    }
+  }
+}
+
+dialog.impas-dialog[open]:where(:not([data-closing]))::backdrop {
+  background-color: rgb(11 19 18 / 0.48);
+  backdrop-filter: blur(2px);
+}
+
+@starting-style {
+  dialog.impas-dialog[open]:where(:not([data-closing]))::backdrop {
+    background-color: rgb(11 19 18 / 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  dialog.impas-dialog,
+  dialog.impas-dialog::backdrop {
+    transition-duration: 100ms;
+  }
+}
+
+/* ==========================================================================
+   Responsive Semantic Table (@container query stacked cards on narrow width)
+   ========================================================================== */
+.impas-table-wrapper {
+  overflow: auto;
+  max-inline-size: 100%;
+  container-type: inline-size;
+}
+
+.impas-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+}
+
+.impas-table thead {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 2;
+  background-color: #F6F8F7;
+}
+
+.impas-table tbody th {
+  position: sticky;
+  inset-inline-start: 0;
+  background-color: #FFFFFF;
+  font-weight: 600;
+}
+
+@container (width < 640px) {
+  .impas-table,
+  .impas-table thead,
+  .impas-table tbody,
+  .impas-table tr,
+  .impas-table th,
+  .impas-table td {
+    display: block;
+  }
+
+  .impas-table thead {
+    display: none;
+  }
+
+  .impas-table tbody tr {
+    padding: 0.875rem 1rem;
+    border-block-end: 1px solid var(--border-hairline);
+  }
+
+  .impas-table tbody tr:last-child {
+    border-block-end: none;
+  }
+
+  .impas-table tbody th {
+    position: static;
+    padding: 0 0 0.5rem 0;
+    background-color: transparent;
+  }
+
+  .impas-table tbody td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.3125rem 0;
+    border: 0;
+  }
+
+  .impas-table tbody td::before {
+    content: attr(data-label);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+}
+
+/* ==========================================================================
+   Accessible Tabs Non-Color Indicator
+   ========================================================================== */
+[role="tab"] {
+  position: relative;
+}
+
+[role="tab"][aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0.5rem;
+  inset-block-end: -1px;
+  border-block-end: 2px solid var(--accent);
+}
+
+/* ==========================================================================
+   Scroll-Driven Section Reveals (Progressive Enhancement)
+   ========================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes impas-reveal-up {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .scroll-reveal {
+      animation: impas-reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 30%;
+    }
+  }
+}
