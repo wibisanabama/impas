@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { LandingInteractiveStage } from "@/components/landing/LandingInteractiveStage";
+import { LandingLenis } from "@/components/landing/LandingLenis";
 
 export default async function LandingPage() {
   const supabase = await createClient();
@@ -12,6 +13,7 @@ export default async function LandingPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F6F8F7] text-[#0B1312]">
+      <LandingLenis />
       {/* Borderless Sticky Top Header at y=0 */}
       <header className="sticky top-0 z-30 w-full bg-[#F6F8F7]/90 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-4 sm:px-8 h-16 flex items-center justify-between gap-4">
